@@ -19,3 +19,4 @@ GAME RULES:
 
 
 Online version: http://valuable-pigs.surge.sh/
+eddited cloistered-zinc.surge.sh
