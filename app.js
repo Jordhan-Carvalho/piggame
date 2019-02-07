@@ -10,12 +10,17 @@ GAME RULES:
 */
 
 let scores, currentScore, activePlayer, gamePlaying;
-newGame();
-
 const diceDOM = document.querySelector(".dice");
+let winValue = 100;
+let diceArray = [];
+newGame();
 
 // document.querySelector(`#current-${activePlayer}`).textContent = dice;
 // document.querySelector(`#current-${activePlayer}`).innerHTML = `<em>${dice}<em>`
+
+document.querySelector(".btn-set").addEventListener("click", () => {
+  winValue = document.getElementById("winvalue").value;
+});
 
 document.querySelector(".dice").style.display = "none";
 
@@ -36,10 +41,23 @@ document.querySelector(".btn-roll").addEventListener("click", () => {
     // if dice != 1 update currentScore
     if (dice != 1) {
       // update score
+      //variable to save previusRoll
+      diceArray.push(dice);
+      let previusRoll = diceArray[diceArray.length - 2];
+
       currentScore += dice;
       document.querySelector(
         `#current-${activePlayer}`
       ).textContent = currentScore;
+      //if previusRoll && dice == 6
+      if (previusRoll == 6 && dice == 6) {
+        // //total score =0
+        scores[activePlayer] = 0;
+        // //other player turn
+        document.querySelector("#score-" + activePlayer).textContent =
+          scores[activePlayer];
+        nextPlayer();
+      }
     } else {
       // next player
       nextPlayer();
@@ -58,7 +76,7 @@ document.querySelector(".btn-hold").addEventListener("click", function() {
       scores[activePlayer];
 
     // Check if player won the game
-    if (scores[activePlayer] >= 100) {
+    if (scores[activePlayer] >= winValue) {
       document.querySelector("#name-" + activePlayer).textContent = "Winner!";
       document.querySelector(".dice").style.display = "none";
       document
@@ -79,6 +97,7 @@ document.querySelector(".btn-new").addEventListener("click", newGame);
 
 function nextPlayer() {
   //Next player
+  diceArray = [];
   activePlayer === 0 ? (activePlayer = 1) : (activePlayer = 0);
   currentScore = 0;
 
@@ -99,7 +118,8 @@ function newGame() {
   activePlayer = 0;
   currentScore = 0;
   gamePlaying = true;
-
+  winValue = 100;
+  document.getElementById("winvalue").value = 100;
   document.querySelector(".dice").style.display = "none";
 
   document.getElementById("score-0").textContent = "0";
@@ -114,3 +134,8 @@ function newGame() {
   document.querySelector(".player-1-panel").classList.remove("active");
   document.querySelector(".player-0-panel").classList.add("active");
 }
+
+// //if previusRoll && dice == 6
+// //total score =0
+// //other player turn
+// nextPlayer();
