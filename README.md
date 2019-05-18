@@ -1,5 +1,7 @@
 # piggame
-piggame JS2019
+Live: http://cloistered-zinc.surge.sh
+
+piggame built based on the Jonas Schmedtmann course JS2019
 
 
 GAME RULES:
@@ -18,5 +20,4 @@ GAME RULES:
 
 
 
-Online version: http://valuable-pigs.surge.sh/
-eddited cloistered-zinc.surge.sh
+
